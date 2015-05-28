@@ -1,17 +1,12 @@
-import string
+from sys import argv
 import re
 import urllib2
 
-frm = "abcdefghijklmnopqrstuvwxyz"
-to = "cdefghijklmnopqrstuvwxyzab"
-trans_table = string.maketrans(frm,to)
+data = urllib2.urlopen("http://www.pythonchallenge.com/pc/def/ocr.html").read()
 
-useUrl = "http://www.pythonchallenge.com/pc/def/map.html"
-data = urllib2.urlopen(useUrl).read()
+test = data.split("<!--")
 
-test = ""
-for char in re.findall('<font color="#f000f0">(.+?)</tr>',data, re.DOTALL):
-    test += char
-
-print test.translate(trans_table)
-print useUrl.translate(trans_table)
+answer = ""
+for char in  re.findall("[A-Za-z]",test[2]):
+    answer += char
+print answer

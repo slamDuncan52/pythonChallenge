@@ -2,11 +2,6 @@ from sys import argv
 import re
 import urllib2
 
-data = urllib2.urlopen("http://www.pythonchallenge.com/pc/def/ocr.html").read()
+data = urllib2.urlopen("http://www.pythonchallenge.com/pc/def/equality.html").read().split("<!--")
 
-test = data.split("<!--")
-
-answer = ""
-for char in  re.findall("[A-Za-z]",test[2]):
-    answer += char
-print answer
+print "".join(re.findall("[^A-Z][A-Z]{3}([a-z])[A-Z]{3}[^A-Z]",data[1]))
