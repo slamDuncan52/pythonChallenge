@@ -1,10 +1,10 @@
-import urllib2
+import urllib.request as urllib
 import re
 import os
-from scipy import misc
-from scipy.stats import mode
+import scipy.misc as misc
+from scipy.stats import mode as mode
 
-data = urllib2.urlopen("http://www.pythonchallenge.com/pc/def/oxygen.png")
+data = urllib.urlopen("http://www.pythonchallenge.com/pc/def/oxygen.png")
 with open("oxygen.png","wb") as imFile:
     imFile.write(data.read())
 
@@ -39,9 +39,9 @@ blkSize = mode(blkList)[0]
 
 for col in range(0,blkEnd,blkSize):
     penult +=chr(imArr[mid][col][0])
-print penult
+print(penult)
 
 finalArr = []
 for num in re.findall("([0-9]+)",penult):
     finalArr.append(chr(int(num)))
-print "".join(finalArr)
+print ("".join(finalArr))

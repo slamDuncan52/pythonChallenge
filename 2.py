@@ -1,12 +1,9 @@
-from sys import argv
 import re
-import urllib2
+import urllib.request as urllib
 
-data = urllib2.urlopen("http://www.pythonchallenge.com/pc/def/ocr.html").read()
+data = urllib.urlopen("http://www.pythonchallenge.com/pc/def/ocr.html")
 
-test = data.split("<!--")
+codec = data.info().get_param("charset","utf-8")
+text = data.read().decode(codec).split("<!--")[2]
 
-answer = ""
-for char in  re.findall("[A-Za-z]",test[2]):
-    answer += char
-print answer
+print("".join(re.findall("[A-Za-z]",text)))

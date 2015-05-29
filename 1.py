@@ -1,17 +1,16 @@
-import string
+import urllib.request as urllib
 import re
-import urllib2
 
 frm = "abcdefghijklmnopqrstuvwxyz"
 to = "cdefghijklmnopqrstuvwxyzab"
-trans_table = string.maketrans(frm,to)
+trans_table = str.maketrans(frm,to)
 
 useUrl = "http://www.pythonchallenge.com/pc/def/map.html"
-data = urllib2.urlopen(useUrl).read()
+data = urllib.urlopen(useUrl)
+codec = data.info().get_param("charset","utf-8")
+text = data.read().decode(codec)
 
-test = ""
-for char in re.findall('<font color="#f000f0">(.+?)</tr>',data, re.DOTALL):
-    test += char
+test = "".join(re.findall('<font color="#f000f0">(.+?)</tr>',text, re.DOTALL))
 
-print test.translate(trans_table)
-print useUrl.translate(trans_table)
+print(test.translate(trans_table))
+print(useUrl.translate(trans_table))
