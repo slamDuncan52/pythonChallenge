@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from sys import argv
 import re
 import urllib.request as urllib
