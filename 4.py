@@ -4,6 +4,7 @@ import urllib.request as urllib
 
 def chainFollow(nothingValue):
     index = 0
+    print("Working...")
     while 1:
         with urllib.urlopen("http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing="+nothingValue) as response:
             data = response.read()
@@ -13,11 +14,11 @@ def chainFollow(nothingValue):
         found = re.findall("(next nothing is )([0-9]+)",data)
         if(len(found) > 0):
             nothingValue = found[0][1]
-            print(str(index) + ": " + nothingValue)
+            #print(str(index) + ": " + nothingValue)
         elif(len(re.findall("(Divide)",data)) > 0):
-            print("DIVIDE " + str(index) + ": " + nothingValue)
             nothingValue = str(int(nothingValue)/2)
+            #print("DIVIDE " + str(index) + ": " + nothingValue)
         else:
-            print("FINISHED")
+            print("Finished: "+ data)
             break
 chainFollow("12345")
