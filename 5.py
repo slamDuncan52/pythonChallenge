@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+import pickle
 import pickle
 import urllib.request as urllib
 res = urllib.urlopen("http://www.pythonchallenge.com/pc/def/banner.p")

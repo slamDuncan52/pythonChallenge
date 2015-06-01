@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import urllib.request as urllib
 import re
 import os
@@ -36,7 +36,7 @@ for col in range(0,blkEnd):
         tmpSize = 1
         prev = cur
 
-blkSize = mode(blkList)[0]
+blkSize = int(mode(blkList)[0][0])
 
 for col in range(0,blkEnd,blkSize):
     penult +=chr(imArr[mid][col][0])
