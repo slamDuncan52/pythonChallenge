@@ -13,4 +13,5 @@ urllib.request.install_opener(urllib.request.build_opener(auth_handle))
 
 xmlMsngr = xmlrpc.client.ServerProxy("http://huge:file@"+site)
 
-print(xmlMsngr.system.methodHelp('phone'))
+print(xmlMsngr.phone('Bert'))
+print("italy is the answer")

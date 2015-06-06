@@ -33,3 +33,6 @@ draw = ImageDraw.Draw(im)
 
 draw.point(firstNums)
 im.show()
+
+
+print("(It's a bull okay)")
