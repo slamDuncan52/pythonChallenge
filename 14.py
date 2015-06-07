@@ -17,31 +17,24 @@ data = urllib.request.urlopen(site)
 with open("wire.png","wb") as imFile:
     imFile.write(data.read())
 
-imArr = misc.imread("wire.png")
+imArr = misc.imread("wire.png")[0]
 im = Image.new("RGB",(100,100))
 os.remove("wire.png")
 
 draw = ImageDraw.Draw(im)
 point = 0
-square = 0
-#0 is right
-#1 is up
-#2 is left
-#3 is down
 for vector in range(200,0,-1):
-        direction = (vector % 4)
-        yVec = (vector // 4)
+        dirn = (vector % 4)
+        static = (vector // 4)
         for spot in range(0,(vector // 2)):
-            spot = (spot + square)
-            if(direction == 0):
-                draw.point((spot,50-yVec),fill=(imArr[0][point][0],imArr[0][point][1],imArr[0][point][2]))
-            elif(direction == 1):
-                draw.point((50-yVec,99-spot),fill=(imArr[0][point][0],imArr[0][point][1],imArr[0][point][2]))
-            elif(direction == 2):
-                draw.point((99-spot,50+yVec),fill=(imArr[0][point][0],imArr[0][point][1],imArr[0][point][2]))
-            elif(direction == 3):
-                draw.point((50+yVec,spot),fill=(imArr[0][point][0],imArr[0][point][1],imArr[0][point][2]))
+            spot = spot + (50-static)
+            pixel = imArr[point]
+            if(dirn % 2):
+                x = 50 + (static * (dirn - 2))
+                y = (dirn - 2) * spot + (99 * (dirn % 3))
+            else:
+                x = (dirn - 1) * -spot + (99 * (dirn // 2))
+                y = 50 + (static * (dirn - 1))
+            draw.point((x,y),fill=(pixel[0],pixel[1],pixel[2]))
             point = point + 1
-        if(direction == 1):
-            square = square + 1
 im.show()
