@@ -4,19 +4,16 @@ import urllib.request as urllib
 import http.cookiejar
 
 site = "http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing="
-cookieJar = http.cookiejar.CookieJar()
-urllib.install_opener(urllib.build_opener(urllib.HTTPCookieProcessor(cookieJar)))
 def chainFollow(nothingValue):
     index = 0
     seen = []
     print("Working...")
     while 1:
         with urllib.urlopen(site+nothingValue) as response:
+            cookie = dict(response.info())["Set-Cookie"]
             data = response.read()
             codec = response.info().get_param('charset','utf-8')
             data = data.decode(codec)
-            for cookie in cookieJar:
-                print(cookie.value)
         index = index + 1
         found = re.findall("(next busynothing is )([0-9]+)",data)
         if(len(found) > 0):
